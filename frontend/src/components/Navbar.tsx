@@ -42,6 +42,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenTracker, onOpenAdmin }) =>
               <Video className="w-4 h-4 text-blue-600" />
               Pesan Komisi
             </a>
+            <a href="#identitas" className="text-slate-600 hover:text-blue-600 transition-colors">
+              Identitas Saya
+            </a>
           </div>
 
           {/* Action Buttons */}

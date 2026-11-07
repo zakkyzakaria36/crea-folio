@@ -66,8 +66,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose,
         body: JSON.stringify(loginForm),
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Autentikasi gagal');
+      const contentType = res.headers.get('content-type') || '';
+      const data = contentType.includes('application/json') ? await res.json() : {};
+      if (!res.ok) throw new Error(data.error || `Login gagal (${res.status}). Backend API belum terhubung.`);
 
       localStorage.setItem('cf_token', data.token);
       localStorage.setItem('cf_user', JSON.stringify(data.user));

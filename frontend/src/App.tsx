@@ -4,6 +4,7 @@ import { Hero } from './components/Hero';
 import { PortfolioGallery } from './components/PortfolioGallery';
 import { DataVizShowcase } from './components/DataVizShowcase';
 import { CommissionForm } from './components/CommissionForm';
+import { IdentitySection } from './components/IdentitySection';
 import { Footer } from './components/Footer';
 import { PortfolioModal } from './components/PortfolioModal';
 import { OrderTrackerModal } from './components/OrderTrackerModal';
@@ -24,60 +25,30 @@ export function App() {
       const res = await fetch('/api/portfolios');
       if (!res.ok) throw new Error('API unavailable');
       const json = await res.json();
-      if (json.data && json.data.length > 0) {
-        setPortfolios(json.data);
-      }
+      if (json.data && json.data.length > 0) setPortfolios(json.data);
     } catch {
-      // Backend off: fallback mockData tetap tampil mulus
+      // Backend offline: fallback portfolio remains visible.
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchPortfolios();
-  }, []);
+  useEffect(() => { fetchPortfolios(); }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-blue-600 selection:text-white">
-      {/* Navigation */}
-      <Navbar
-        activeSection="showcase"
-        onOpenTracker={() => setIsTrackerOpen(true)}
-        onOpenAdmin={() => setIsAdminOpen(true)}
-      />
-
-      {/* Main Sections */}
+      <Navbar activeSection="showcase" onOpenTracker={() => setIsTrackerOpen(true)} onOpenAdmin={() => setIsAdminOpen(true)} />
       <main className="flex-1">
         <Hero />
-        <PortfolioGallery
-          items={portfolios}
-          loading={loading}
-          onSelectItem={(item) => setSelectedPortfolio(item)}
-        />
+        <PortfolioGallery items={portfolios} loading={loading} onSelectItem={setSelectedPortfolio} />
         <DataVizShowcase />
         <CommissionForm />
+        <IdentitySection />
       </main>
-
-      {/* Footer */}
       <Footer />
-
-      {/* Popups & Modals */}
-      <PortfolioModal
-        item={selectedPortfolio}
-        onClose={() => setSelectedPortfolio(null)}
-      />
-
-      <OrderTrackerModal
-        isOpen={isTrackerOpen}
-        onClose={() => setIsTrackerOpen(false)}
-      />
-
-      <AdminDashboard
-        isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
-        onRefreshData={fetchPortfolios}
-      />
+      <PortfolioModal item={selectedPortfolio} onClose={() => setSelectedPortfolio(null)} />
+      <OrderTrackerModal isOpen={isTrackerOpen} onClose={() => setIsTrackerOpen(false)} />
+      <AdminDashboard isOpen={isAdminOpen} onClose={() => setIsAdminOpen(false)} onRefreshData={fetchPortfolios} />
     </div>
   );
 }
