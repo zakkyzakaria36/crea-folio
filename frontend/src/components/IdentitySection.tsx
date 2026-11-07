@@ -1,5 +1,5 @@
 import React from 'react';
-import { Instagram, GraduationCap, UserRound } from 'lucide-react';
+import { Camera, GraduationCap, UserRound } from 'lucide-react';
 
 export const IdentitySection: React.FC = () => (
   <section id="identitas" className="py-16 sm:py-20 border-t border-slate-200/80 bg-white">
@@ -23,7 +23,7 @@ export const IdentitySection: React.FC = () => (
             <img src="/images.jpeg" alt="Ikon Instagram ZxProject" className="w-full h-full object-cover" />
           </div>
           <div>
-            <div className="flex items-center gap-2 text-blue-600 mb-1"><Instagram className="w-4 h-4" /><span className="text-xs font-bold uppercase">Instagram</span></div>
+            <div className="flex items-center gap-2 text-blue-600 mb-1"><Camera className="w-4 h-4" /><span className="text-xs font-bold uppercase">Instagram</span></div>
             <a href="https://instagram.com/zkyzakariaa" target="_blank" rel="noreferrer" className="text-xl font-black text-slate-900 hover:text-blue-600">@zkyzakariaa</a>
           </div>
         </div>
