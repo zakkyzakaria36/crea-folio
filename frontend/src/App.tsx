@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { PortfolioGallery } from './components/PortfolioGallery';
-import { DataVizShowcase } from './components/DataVizShowcase';
 import { CommissionForm } from './components/CommissionForm';
 import { IdentitySection } from './components/IdentitySection';
 import { Footer } from './components/Footer';
@@ -41,7 +40,6 @@ export function App() {
       <main className="flex-1">
         <Hero />
         <PortfolioGallery items={portfolios} loading={loading} onSelectItem={setSelectedPortfolio} />
-        <DataVizShowcase />
         <CommissionForm />
         <IdentitySection />
       </main>

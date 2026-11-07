@@ -12,7 +12,7 @@ export const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         {/* Intro Kreator */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-          <img src="/IMG_2801.png" alt="Zakky Zakaria" className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-lg ring-2 ring-blue-200" />
+          <img src="/IMG_2801.png?v=2" alt="Zakky Zakaria" className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl object-cover border-4 border-white shadow-xl ring-2 ring-blue-200" />
           <div className="text-center sm:text-left">
             <p className="text-sm font-semibold text-blue-600">Halo, saya Zakky</p>
             <p className="text-sm text-slate-600 flex items-center justify-center sm:justify-start gap-1.5 mt-1"><GraduationCap className="w-4 h-4 text-blue-500" /> Student Data Science · ZxProject</p>
