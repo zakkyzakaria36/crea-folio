@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Send, Upload, CheckCircle2, Copy, AlertCircle, Sparkles } from 'lucide-react';
 import type { CategoryType } from '../types';
+import { apiUrl } from '../api';
 
 export const CommissionForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ export const CommissionForm: React.FC = () => {
         const uploadFormData = new FormData();
         uploadFormData.append('file', file);
 
-        const uploadRes = await fetch('/api/upload', {
+        const uploadRes = await fetch(apiUrl('/api/upload'), {
           method: 'POST',
           body: uploadFormData,
         });
@@ -56,7 +57,7 @@ export const CommissionForm: React.FC = () => {
       }
 
       // 2. Kirim data order ke backend
-      const res = await fetch('/api/orders', {
+      const res = await fetch(apiUrl('/api/orders'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Lock, Plus, Trash2, Edit3, Upload, RefreshCw, FileText, LogOut, Shield, KeyRound, CheckCircle2, AlertCircle } from 'lucide-react';
 import type { PortfolioItem, OrderItem, AuthState, CategoryType, MediaType, OrderStatus } from '../types';
+import { apiUrl } from '../api';
 
 interface AdminDashboardProps {
   isOpen: boolean;
@@ -60,7 +61,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose,
     setErrorMsg(null);
 
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(apiUrl('/api/auth/login'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginForm),
@@ -94,11 +95,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose,
 
     try {
       if (activeTab === 'portfolios') {
-        const res = await fetch('/api/portfolios');
+        const res = await fetch(apiUrl('/api/portfolios'));
         const json = await res.json();
         setPortfolios(json.data || []);
       } else {
-        const res = await fetch('/api/orders', {
+        const res = await fetch(apiUrl('/api/orders'), {
           headers: { Authorization: `Bearer ${auth.token}` },
         });
         const json = await res.json();
@@ -118,7 +119,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose,
       const formData = new FormData();
       formData.append('file', file);
 
-      const res = await fetch('/api/upload', {
+      const res = await fetch(apiUrl('/api/upload'), {
         method: 'POST',
         body: formData,
       });
@@ -143,7 +144,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose,
     if (!auth.token) return;
 
     try {
-      const url = editingId ? `/api/portfolios/${editingId}` : '/api/portfolios';
+      const url = editingId ? apiUrl(`/api/portfolios/${editingId}`) : apiUrl('/api/portfolios');
       const method = editingId ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -179,7 +180,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose,
   const handleDeletePortfolio = async (id: number) => {
     if (!confirm('Apakah Anda yakin ingin menghapus karya portofolio ini?')) return;
     try {
-      const res = await fetch(`/api/portfolios/${id}`, {
+      const res = await fetch(apiUrl(`/api/portfolios/${id}`), {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${auth.token}` },
       });
@@ -193,7 +194,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose,
 
   const handleUpdateOrderStatus = async (orderId: number, status: OrderStatus, adminNotes?: string) => {
     try {
-      const res = await fetch(`/api/orders/${orderId}`, {
+      const res = await fetch(apiUrl(`/api/orders/${orderId}`), {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -224,7 +225,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose,
 
     setPwLoading(true);
     try {
-      const res = await fetch('/api/auth/change-password', {
+      const res = await fetch(apiUrl('/api/auth/change-password'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

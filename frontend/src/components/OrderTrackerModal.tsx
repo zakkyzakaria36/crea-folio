@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Search, AlertCircle } from 'lucide-react';
 import type { OrderStatus } from '../types';
+import { apiUrl } from '../api';
 
 interface OrderTrackerModalProps {
   isOpen: boolean;
@@ -24,7 +25,7 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({ isOpen, on
     setOrder(null);
 
     try {
-      const res = await fetch(`/api/orders/track/${encodeURIComponent(code.trim())}`);
+      const res = await fetch(apiUrl(`/api/orders/track/${encodeURIComponent(code.trim())}`));
       const json = await res.json();
 
       if (!res.ok) {

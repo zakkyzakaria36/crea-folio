@@ -10,6 +10,7 @@ import { OrderTrackerModal } from './components/OrderTrackerModal';
 import { AdminDashboard } from './components/AdminDashboard';
 import { fallbackPortfolios } from './mockData';
 import type { PortfolioItem } from './types';
+import { apiUrl } from './api';
 
 export function App() {
   const [portfolios, setPortfolios] = useState<PortfolioItem[]>(fallbackPortfolios);
@@ -21,7 +22,7 @@ export function App() {
   const fetchPortfolios = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/portfolios');
+      const res = await fetch(apiUrl('/api/portfolios'));
       if (!res.ok) throw new Error('API unavailable');
       const json = await res.json();
       if (json.data && json.data.length > 0) setPortfolios(json.data);
