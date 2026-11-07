@@ -5,10 +5,11 @@ import { eq } from 'drizzle-orm';
 import { db } from '../db/index.js';
 import { users } from '../db/schema.js';
 import { authMiddleware } from '../middleware/auth.js';
+import type { AppEnv } from '../middleware/auth.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'creafolio_super_secret_jwt_key_2026';
 
-export const authRoutes = new Hono();
+export const authRoutes = new Hono<AppEnv>();
 
 authRoutes.post('/login', async (c) => {
   const { username, password } = await c.req.json();

@@ -1,4 +1,10 @@
 import type { Context, Next } from 'hono';
+
+export type AppEnv = {
+  Variables: {
+    user: AuthUser;
+  };
+};
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'creafolio_super_secret_jwt_key_2026';
@@ -9,7 +15,7 @@ export interface AuthUser {
   role: string;
 }
 
-export async function authMiddleware(c: Context, next: Next) {
+export async function authMiddleware(c: Context<AppEnv>, next: Next) {
   const authHeader = c.req.header('Authorization');
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return c.json({ error: 'Unauthorized: Missing or invalid token' }, 401);

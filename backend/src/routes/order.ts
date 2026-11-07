@@ -4,8 +4,9 @@ import crypto from 'crypto';
 import { db } from '../db/index.js';
 import { orders } from '../db/schema.js';
 import { authMiddleware } from '../middleware/auth.js';
+import type { AppEnv } from '../middleware/auth.js';
 
-export const orderRoutes = new Hono();
+export const orderRoutes = new Hono<AppEnv>();
 
 // Generate unique order code: CF-YYYYMMDD-XXXX
 function generateOrderCode(): string {
@@ -76,7 +77,7 @@ orderRoutes.get('/', authMiddleware, async (c) => {
 
 // PATCH update order status & admin notes (Admin only)
 orderRoutes.patch('/:id', authMiddleware, async (c) => {
-  const id = parseInt(c.req.param('id'), 10);
+  const id = parseInt(c.req.param('id') ?? '', 10);
   const { status, adminNotes } = await c.req.json();
 
   const [existing] = await db.select().from(orders).where(eq(orders.id, id)).limit(1);
@@ -97,7 +98,7 @@ orderRoutes.patch('/:id', authMiddleware, async (c) => {
 
 // DELETE order (Admin only)
 orderRoutes.delete('/:id', authMiddleware, async (c) => {
-  const id = parseInt(c.req.param('id'), 10);
+  const id = parseInt(c.req.param('id') ?? '', 10);
 
   const [existing] = await db.select().from(orders).where(eq(orders.id, id)).limit(1);
   if (!existing) {

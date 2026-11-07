@@ -3,8 +3,9 @@ import { eq, desc } from 'drizzle-orm';
 import { db } from '../db/index.js';
 import { portfolios } from '../db/schema.js';
 import { authMiddleware } from '../middleware/auth.js';
+import type { AppEnv } from '../middleware/auth.js';
 
-export const portfolioRoutes = new Hono();
+export const portfolioRoutes = new Hono<AppEnv>();
 
 // GET all portfolios (with optional category filter)
 portfolioRoutes.get('/', async (c) => {
@@ -71,7 +72,7 @@ portfolioRoutes.post('/', authMiddleware, async (c) => {
 
 // PUT update portfolio (Admin only)
 portfolioRoutes.put('/:id', authMiddleware, async (c) => {
-  const id = parseInt(c.req.param('id'), 10);
+  const id = parseInt(c.req.param('id') ?? '', 10);
   const body = await c.req.json();
 
   const [existing] = await db.select().from(portfolios).where(eq(portfolios.id, id)).limit(1);
@@ -100,7 +101,7 @@ portfolioRoutes.put('/:id', authMiddleware, async (c) => {
 
 // DELETE portfolio (Admin only)
 portfolioRoutes.delete('/:id', authMiddleware, async (c) => {
-  const id = parseInt(c.req.param('id'), 10);
+  const id = parseInt(c.req.param('id') ?? '', 10);
 
   const [existing] = await db.select().from(portfolios).where(eq(portfolios.id, id)).limit(1);
   if (!existing) {
