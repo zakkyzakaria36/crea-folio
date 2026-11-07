@@ -20,6 +20,7 @@ export function App() {
 
   const fetchPortfolios = async () => {
     try {
+      setLoading(true);
       const res = await fetch('/api/portfolios');
       if (!res.ok) throw new Error('API unavailable');
       const json = await res.json();
@@ -28,6 +29,8 @@ export function App() {
       }
     } catch {
       // Backend off: fallback mockData tetap tampil mulus
+    } finally {
+      setLoading(false);
     }
   };
 
