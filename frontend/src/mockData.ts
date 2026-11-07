@@ -1,0 +1,52 @@
+import type { PortfolioItem } from './types';
+
+export const fallbackPortfolios: PortfolioItem[] = [
+  {
+    id: 1,
+    title: 'Ilustrasi Cyberpunk Neon Street 2026',
+    slug: 'cyberpunk-neon-street',
+    category: 'illustration',
+    description: 'Lukisan digital detail pemandangan kota futuristik bernuansa cyberpunk dengan pantulan lampu neon pada aspal basah.',
+    mediaType: 'image',
+    mediaUrl: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=80',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80',
+    extraData: null,
+    isFeatured: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    title: 'Reels Sinematik Ekspedisi Wisata',
+    slug: 'cinematic-travel-reel-bali',
+    category: 'video',
+    description: 'Pengeditan video dinamis, grading warna hangat tropis, dan rancangan tata suara untuk promosi pariwisata.',
+    mediaType: 'embed',
+    mediaUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=80',
+    extraData: null,
+    isFeatured: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 3,
+    title: 'Dashboard Eksekutif Analitik E-Commerce',
+    slug: 'ecommerce-analytics-dashboard',
+    category: 'dataviz',
+    description: 'Dashboard analitik interaktif menampilkan GMV penjualan, retensi pengguna, konversi corong, dan tren pertumbuhan.',
+    mediaType: 'link',
+    mediaUrl: 'https://example.com/live-dashboard',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80',
+    extraData: {
+      metrics: [
+        { label: 'Pertumbuhan Omzet', value: '+34,2%' },
+        { label: 'Pengguna Aktif', value: '128.500' },
+        { label: 'Tingkat Konversi', value: '3,8%' },
+      ],
+    },
+    isFeatured: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+];

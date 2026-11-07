@@ -17,92 +17,92 @@ export const DataVizShowcase: React.FC = () => {
 
   const metricConfig = {
     revenue: {
-      label: 'Campaign Revenue ($)',
-      color: '#8b5cf6',
+      label: 'Estimasi Pendapatan ($)',
+      color: '#2563eb',
       unit: '$',
-      total: '$57,400',
-      growth: '+28.4% MoM',
+      total: '$57.400',
+      growth: '+28,4% MoM',
     },
     audience: {
-      label: 'Total Viewers & Engagement',
-      color: '#38bdf8',
+      label: 'Jangkauan Penonton & Impresi',
+      color: '#0284c7',
       unit: '',
-      total: '297,000',
-      growth: '+42.1% Reach',
+      total: '297.000',
+      growth: '+42,1% Jangkauan',
     },
     completionRate: {
-      label: 'Video Retention / Completion Rate',
-      color: '#34d399',
+      label: 'Retensi Tontonan Video',
+      color: '#10b981',
       unit: '%',
       total: '96%',
-      growth: '+18% Benchmark',
+      growth: '+18% Rata-rata',
     },
   };
 
   const activeConfig = metricConfig[metric];
 
   return (
-    <section id="dataviz" className="py-16 sm:py-24 border-t border-slate-900 bg-slate-950/50">
+    <section id="dataviz" className="py-16 sm:py-24 border-t border-slate-200/80 bg-gradient-to-b from-blue-50/40 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/80 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
             <Activity className="w-3.5 h-3.5" />
-            Specialty Showcase
+            Fitur Khusus
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-            Interactive Data Storytelling & Dashboards
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mb-4">
+            Showcase Visualisasi Data & Dashboard
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Data visualization is not just charts; it is decision intelligence. Here is a live sample of custom analytics UI tailored for video production metrics and client growth.
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Data bukan hanya angka tabel, melainkan cerita visual yang memandu keputusan. Berikut contoh dashboard analitik interaktif berbasis chart modern.
           </p>
         </div>
 
-        {/* Dashboard Card Container */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl">
+        {/* Dashboard Card Container (Clean White & Blue border) */}
+        <div className="bg-white border border-blue-100 rounded-3xl p-6 sm:p-8 shadow-xl shadow-blue-500/5">
           {/* Controls & Metric Selectors */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-slate-800 gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-slate-100 gap-4">
             <div>
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Active Performance Metric</span>
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Metrik Aktif</span>
               <div className="flex items-baseline gap-3 mt-1">
-                <span className="text-2xl sm:text-3xl font-extrabold text-white">{activeConfig.total}</span>
-                <span className="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                <span className="text-2xl sm:text-3xl font-black text-slate-900">{activeConfig.total}</span>
+                <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">
                   {activeConfig.growth}
                 </span>
               </div>
             </div>
 
             {/* Toggle Pills */}
-            <div className="flex gap-2 p-1 bg-slate-950 border border-slate-800 rounded-xl self-start sm:self-auto">
+            <div className="flex gap-1.5 p-1 bg-slate-100 rounded-2xl self-start sm:self-auto border border-slate-200">
               <button
                 onClick={() => setMetric('revenue')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   metric === 'revenue'
-                    ? 'bg-brand-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'text-slate-600 hover:text-blue-600'
                 }`}
               >
-                Revenue
+                Pendapatan
               </button>
               <button
                 onClick={() => setMetric('audience')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   metric === 'audience'
-                    ? 'bg-sky-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'text-slate-600 hover:text-blue-600'
                 }`}
               >
-                Reach / Views
+                Jangkauan
               </button>
               <button
                 onClick={() => setMetric('completionRate')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   metric === 'completionRate'
-                    ? 'bg-emerald-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'text-slate-600 hover:text-blue-600'
                 }`}
               >
-                Retention %
+                Retensi Video
               </button>
             </div>
           </div>
@@ -113,20 +113,22 @@ export const DataVizShowcase: React.FC = () => {
               <AreaChart data={sampleChartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="metricGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={activeConfig.color} stopOpacity={0.4} />
+                    <stop offset="5%" stopColor={activeConfig.color} stopOpacity={0.3} />
                     <stop offset="95%" stopColor={activeConfig.color} stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                 <XAxis dataKey="month" stroke="#64748b" fontSize={12} tickLine={false} />
                 <YAxis stroke="#64748b" fontSize={12} tickLine={false} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#0f172a',
-                    borderColor: '#334155',
+                    backgroundColor: '#ffffff',
+                    borderColor: '#cbd5e1',
                     borderRadius: '12px',
-                    color: '#f8fafc',
+                    color: '#0f172a',
+                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
                     fontSize: '12px',
+                    fontWeight: 'bold',
                   }}
                   formatter={(value: any) => [`${activeConfig.unit}${value}`, activeConfig.label]}
                 />
@@ -134,7 +136,7 @@ export const DataVizShowcase: React.FC = () => {
                   type="monotone"
                   dataKey={metric}
                   stroke={activeConfig.color}
-                  strokeWidth={2.5}
+                  strokeWidth={3}
                   fillOpacity={1}
                   fill="url(#metricGrad)"
                 />
@@ -143,34 +145,34 @@ export const DataVizShowcase: React.FC = () => {
           </div>
 
           {/* KPI Mini-Cards below chart */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 pt-6 border-t border-slate-800">
-            <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center gap-3">
-              <div className="p-2.5 rounded-lg bg-brand-500/10 text-brand-400">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 pt-6 border-t border-slate-100">
+            <div className="p-4 rounded-2xl bg-blue-50/50 border border-blue-100 flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-blue-600 text-white">
                 <TrendingUp className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xs text-slate-400 font-medium">Data Pipeline</p>
-                <p className="text-sm font-semibold text-white">Automated ETL & Sync</p>
+                <p className="text-xs text-slate-500 font-semibold">Pipeline Data</p>
+                <p className="text-sm font-bold text-slate-900">Sinkronisasi Realtime</p>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center gap-3">
-              <div className="p-2.5 rounded-lg bg-sky-500/10 text-sky-400">
+            <div className="p-4 rounded-2xl bg-blue-50/50 border border-blue-100 flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-blue-600 text-white">
                 <Users className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xs text-slate-400 font-medium">Audience Segmentation</p>
-                <p className="text-sm font-semibold text-white">Dynamic Cohorts</p>
+                <p className="text-xs text-slate-500 font-semibold">Segmentasi Audiens</p>
+                <p className="text-sm font-bold text-slate-900">Kohort Dinamis</p>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center gap-3">
-              <div className="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400">
+            <div className="p-4 rounded-2xl bg-blue-50/50 border border-blue-100 flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-blue-600 text-white">
                 <Target className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xs text-slate-400 font-medium">Interactive Tooling</p>
-                <p className="text-sm font-semibold text-white">D3, Recharts, PowerBI</p>
+                <p className="text-xs text-slate-500 font-semibold">Integrasi Teknologi</p>
+                <p className="text-sm font-bold text-slate-900">Recharts, D3, PowerBI</p>
               </div>
             </div>
           </div>

@@ -8,25 +8,26 @@ import { Footer } from './components/Footer';
 import { PortfolioModal } from './components/PortfolioModal';
 import { OrderTrackerModal } from './components/OrderTrackerModal';
 import { AdminDashboard } from './components/AdminDashboard';
+import { fallbackPortfolios } from './mockData';
 import type { PortfolioItem } from './types';
 
 export function App() {
-  const [portfolios, setPortfolios] = useState<PortfolioItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [portfolios, setPortfolios] = useState<PortfolioItem[]>(fallbackPortfolios);
+  const [loading, setLoading] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState<PortfolioItem | null>(null);
   const [isTrackerOpen, setIsTrackerOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
   const fetchPortfolios = async () => {
     try {
-      setLoading(true);
       const res = await fetch('/api/portfolios');
+      if (!res.ok) throw new Error('API unavailable');
       const json = await res.json();
-      setPortfolios(json.data || []);
-    } catch (err) {
-      console.error('Failed to load portfolios:', err);
-    } finally {
-      setLoading(false);
+      if (json.data && json.data.length > 0) {
+        setPortfolios(json.data);
+      }
+    } catch {
+      // Backend off: fallback mockData tetap tampil mulus
     }
   };
 
@@ -35,7 +36,7 @@ export function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-blue-600 selection:text-white">
       {/* Navigation */}
       <Navbar
         activeSection="showcase"

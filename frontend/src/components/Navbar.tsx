@@ -1,5 +1,5 @@
 import React from 'react';
-import { Palette, Video, BarChart3, Search, ShieldCheck, Sparkles } from 'lucide-react';
+import { Palette, Video, BarChart3, Search, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   onOpenTracker: () => void;
@@ -9,53 +9,56 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenTracker, onOpenAdmin }) => {
   return (
-    <nav className="sticky top-0 z-40 backdrop-blur-md bg-slate-950/80 border-b border-slate-800">
+    <nav className="sticky top-0 z-40 backdrop-blur-md bg-white/90 border-b border-blue-100/80 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Brand */}
           <a href="#" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-indigo-500 to-purple-400 flex items-center justify-center text-white shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
-              <Sparkles className="w-5 h-5" />
+            {/* Logo Badge Teks ZX gradasi biru */}
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-blue-500 to-sky-400 flex items-center justify-center text-white font-extrabold text-base tracking-wider shadow-md shadow-blue-500/25 group-hover:scale-105 transition-transform">
+              ZX
             </div>
             <div>
-              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                Crea<span className="text-brand-400">Folio</span>
+              <span className="text-xl font-black tracking-tight text-slate-900">
+                Zx<span className="text-blue-600">Project</span>
               </span>
-              <p className="text-[10px] text-slate-400 tracking-wider uppercase font-medium">Art • Video • Data</p>
+              <p className="text-[10px] text-blue-600/70 font-semibold tracking-wider uppercase">
+                Ilustrasi • Video • Data Viz
+              </p>
             </div>
           </a>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <a href="#showcase" className="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
-              <Palette className="w-4 h-4 text-purple-400" />
-              Showcase
+          {/* Navigation Links (Bahasa Indonesia) */}
+          <div className="hidden md:flex items-center space-x-7 text-sm font-semibold">
+            <a href="#showcase" className="text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-1.5">
+              <Palette className="w-4 h-4 text-blue-600" />
+              Galeri Karya
             </a>
-            <a href="#dataviz" className="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
-              <BarChart3 className="w-4 h-4 text-emerald-400" />
-              Live Analytics
+            <a href="#dataviz" className="text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-1.5">
+              <BarChart3 className="w-4 h-4 text-blue-600" />
+              Visualisasi Data
             </a>
-            <a href="#commission" className="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
-              <Video className="w-4 h-4 text-sky-400" />
-              Order Commission
+            <a href="#commission" className="text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-1.5">
+              <Video className="w-4 h-4 text-blue-600" />
+              Pesan Komisi
             </a>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2.5">
             <button
               onClick={onOpenTracker}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors shadow-sm"
-              title="Track your order status"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-xl bg-blue-50/80 border border-blue-200 text-blue-700 hover:bg-blue-100 transition-all shadow-xs"
+              title="Lacak status pesanan kamu"
             >
-              <Search className="w-3.5 h-3.5 text-brand-400" />
-              <span className="hidden sm:inline">Track Order</span>
+              <Search className="w-3.5 h-3.5 text-blue-600" />
+              <span className="hidden sm:inline">Lacak Pesanan</span>
             </button>
 
             <button
               onClick={onOpenAdmin}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-600/20 border border-brand-500/40 text-brand-300 hover:bg-brand-600 hover:text-white transition-all shadow-sm"
-              title="Admin Portal"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all shadow-md shadow-blue-600/20"
+              title="Portal Admin"
             >
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Admin</span>

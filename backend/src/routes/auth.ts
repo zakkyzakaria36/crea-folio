@@ -48,3 +48,32 @@ authRoutes.get('/me', authMiddleware, async (c) => {
   const currentUser = c.get('user');
   return c.json({ user: currentUser });
 });
+
+// POST change password (Admin only)
+authRoutes.post('/change-password', authMiddleware, async (c) => {
+  const currentUser = c.get('user');
+  const { currentPassword, newPassword } = await c.req.json();
+
+  if (!currentPassword || !newPassword) {
+    return c.json({ error: 'Password lama dan password baru wajib diisi' }, 400);
+  }
+
+  if (newPassword.length < 6) {
+    return c.json({ error: 'Password baru minimal terdiri dari 6 karakter' }, 400);
+  }
+
+  const [user] = await db.select().from(users).where(eq(users.id, currentUser.id)).limit(1);
+  if (!user) {
+    return c.json({ error: 'Pengguna tidak ditemukan' }, 404);
+  }
+
+  const isValid = await bcrypt.compare(currentPassword, user.passwordHash);
+  if (!isValid) {
+    return c.json({ error: 'Password lama tidak sesuai' }, 400);
+  }
+
+  const newHash = await bcrypt.hash(newPassword, 10);
+  await db.update(users).set({ passwordHash: newHash }).where(eq(users.id, user.id));
+
+  return c.json({ message: 'Password berhasil diubah!' });
+});

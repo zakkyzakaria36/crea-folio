@@ -21,7 +21,17 @@ app.use('*', cors({
 // Serve uploaded files statically
 app.use('/uploads/*', serveStatic({ root: './' }));
 
-// Health Check
+// Root & Health Check
+app.get('/', (c) => c.json({
+  name: 'CreaFolio API Server',
+  status: 'running',
+  frontendUrl: 'http://localhost:3000',
+  documentation: {
+    health: '/health',
+    portfolios: '/api/portfolios',
+    orders: '/api/orders',
+  },
+}));
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }));
 
 // Mount Routes

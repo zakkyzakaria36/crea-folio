@@ -1,61 +1,48 @@
-# CreaFolio — Multidisciplinary Portfolio & Commission Platform
+# ZxProject — Platform Portofolio & Komisi Jasa Kreatif
 
-Full-stack decoupled platform designed for creators specializing in **Digital Illustration**, **Video & Motion Production**, and **Interactive Data Visualization / Dashboards**.
+Platform *full-stack decoupled* modern untuk kreator yang mencakup **Ilustrasi Digital**, **Editing Video & Motion**, serta **Visualisasi Data & Dashboard Interaktif**.
 
 ---
 
 ## 🛠 Tech Stack
 
-- **Backend:** Node.js + Hono (Lightweight & high performance)
+- **Backend:** Node.js + Hono Framework
 - **Database & ORM:** MySQL 8 (Docker Container) + Drizzle ORM
-- **Frontend:** React 19 + Vite + Tailwind CSS v4 + Recharts + Lucide Icons
-- **Storage:** Local static uploads (`/uploads/`) with multipart handling
+- **Frontend:** React + Vite + Tailwind CSS v4 + Recharts + Lucide Icons
+- **Storage:** Local static uploads (`/uploads/`) dengan penanganan multipart file
+- **Auth:** JWT Token & Enkripsi Kata Sandi Bcrypt
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Panduan Menjalankan
 
-### 1. Jalankan Database (MySQL via Docker)
+### 1. Nyalakan Database MySQL (Docker)
 ```bash
 docker compose up -d
 ```
-> MySQL berjalan pada port `3307` (container name: `creafolio_mysql`).
+> Berjalan di port `3307` (container: `creafolio_mysql`).
 
 ### 2. Jalankan Backend API
 ```bash
 npm run backend
 ```
-> Server API aktif di: `http://localhost:5000`
+> Server API aktif di: `http://localhost:5001`
 
-### 3. Jalankan Frontend UI
+### 3. Jalankan Frontend Web
 Buka terminal baru:
 ```bash
 npm run frontend
 ```
-> Antarmuka web aktif di: `http://localhost:3000`
+> Web aplikasi aktif di: `http://localhost:3000`
 
 ---
 
-## 🔑 Akun Default Admin
-- **Username:** `admin`
-- **Password:** `admin123`
-*(Tombol Admin berada di pojok kanan atas Navbar)*
-
----
-
-## 📡 Ringkasan API Endpoints
-
-### Public:
-- `GET /api/portfolios` — Ambil semua item portfolio (filter `?category=illustration|video|dataviz`).
-- `GET /api/portfolios/:idOrSlug` — Ambil detail satu item portfolio.
-- `POST /api/orders` — Submit pesanan komisi (menghasilkan kode resi unik `CF-YYYYMMDD-XXXX`).
-- `GET /api/orders/track/:code` — Cek status progres pesanan secara real-time.
-- `POST /api/upload` — Upload file attachment (PDF/PNG/Video).
-
-### Admin (Header: `Authorization: Bearer <token>`):
-- `POST /api/auth/login` — Login admin.
-- `POST /api/portfolios` — Tambah portfolio baru.
-- `PUT /api/portfolios/:id` — Update portfolio.
-- `DELETE /api/portfolios/:id` — Hapus portfolio.
-- `GET /api/orders` — Lihat daftar semua pesanan klien.
-- `PATCH /api/orders/:id` — Update status order (`pending`, `reviewed`, `in_progress`, `completed`, `rejected`) & catatan.
+## 🔑 Panel Admin & Keamanan
+- Buka web `http://localhost:3000` lalu klik tombol **Admin** di pojok kanan atas.
+- Akun default awal: `admin` / `admin123`
+- Kata sandi dapat diubah langsung dari tab **"Ubah Password"** di dalam dashboard admin.
+- Reset darurat via terminal:
+  ```bash
+  cd backend
+  npx tsx src/resetPassword.ts SandiBaruAnda
+  ```

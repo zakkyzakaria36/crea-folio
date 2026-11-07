@@ -10,7 +10,7 @@ export const CommissionForm: React.FC = () => {
     serviceCategory: 'illustration' as CategoryType | 'other',
     projectTitle: '',
     description: '',
-    budgetRange: '$200 - $500',
+    budgetRange: 'Rp 50rb - 150rb',
     deadline: '',
   });
 
@@ -35,7 +35,7 @@ export const CommissionForm: React.FC = () => {
     try {
       let referenceFileUrl: string | null = null;
 
-      // 1. Upload attachment if provided
+      // 1. Upload attachment jika ada
       if (file) {
         setUploading(true);
         const uploadFormData = new FormData();
@@ -47,7 +47,7 @@ export const CommissionForm: React.FC = () => {
         });
 
         if (!uploadRes.ok) {
-          throw new Error('Failed to upload attachment file');
+          throw new Error('Gagal mengunggah file lampiran');
         }
 
         const uploadJson = await uploadRes.json();
@@ -55,7 +55,7 @@ export const CommissionForm: React.FC = () => {
         setUploading(false);
       }
 
-      // 2. Submit order to backend
+      // 2. Kirim data order ke backend
       const res = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -67,12 +67,12 @@ export const CommissionForm: React.FC = () => {
 
       const resJson = await res.json();
       if (!res.ok) {
-        throw new Error(resJson.error || 'Failed to submit order');
+        throw new Error(resJson.error || 'Gagal mengirim pesanan');
       }
 
       setSubmittedOrderCode(resJson.orderCode);
     } catch (err: any) {
-      setErrorMsg(err.message || 'Something went wrong. Please try again.');
+      setErrorMsg(err.message || 'Terjadi kesalahan. Silakan coba kembali.');
     } finally {
       setSubmitting(false);
       setUploading(false);
@@ -88,49 +88,49 @@ export const CommissionForm: React.FC = () => {
   };
 
   return (
-    <section id="commission" className="py-16 sm:py-24 border-t border-slate-900">
+    <section id="commission" className="py-16 sm:py-24 border-t border-slate-200/80 bg-slate-50/70">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5" />
-            Let's Collaborate
+            Kolaborasi & Pemesanan
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-            Order Commission or Project
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mb-4">
+            Form Pemesanan Jasa & Proyek
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
-            Fill out your project specifications. You will receive an instant Tracking Code to monitor progress directly on this website.
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+            Isi spesifikasi kebutuhan Anda. Setelah dikirim, Anda akan menerima Kode Resi unik untuk memantau status pengerjaan secara berkala.
           </p>
         </div>
 
         {submittedOrderCode ? (
-          /* Success Card */
-          <div className="bg-slate-900 border border-emerald-500/40 rounded-3xl p-8 sm:p-10 text-center shadow-2xl relative overflow-hidden">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-5">
+          /* Kartu Berhasil Kirim */
+          <div className="bg-white border-2 border-blue-400 rounded-3xl p-8 sm:p-10 text-center shadow-xl shadow-blue-500/10">
+            <div className="w-16 h-16 rounded-full bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center mx-auto mb-5">
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
-            <h3 className="text-2xl font-bold text-white mb-2">Commission Order Received!</h3>
-            <p className="text-sm text-slate-300 max-w-md mx-auto mb-6">
-              Thank you for your inquiry. Please store your unique Order Tracking Code below to check real-time progress.
+            <h3 className="text-2xl font-black text-slate-900 mb-2">Pesanan Komisi Berhasil Dikirim!</h3>
+            <p className="text-sm text-slate-600 max-w-md mx-auto mb-6 leading-relaxed">
+              Terima kasih. Simpan kode resi berikut untuk melacak perkembangan proyek Anda di menu <b>Lacak Pesanan</b>.
             </p>
 
-            {/* Code Box */}
-            <div className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-slate-950 border border-slate-800 mb-6">
-              <span className="font-mono text-xl sm:text-2xl font-bold text-brand-400 tracking-wider">
+            {/* Box Kode Resi */}
+            <div className="inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-blue-50 border border-blue-200 mb-6">
+              <span className="font-mono text-xl sm:text-2xl font-black text-blue-600 tracking-wider">
                 {submittedOrderCode}
               </span>
               <button
                 onClick={copyCode}
-                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors"
-                title="Copy code"
+                className="p-2 rounded-xl bg-white hover:bg-blue-100 text-blue-700 border border-blue-200 transition-colors shadow-xs"
+                title="Salin kode"
               >
                 <Copy className="w-4 h-4" />
               </button>
             </div>
-            {copied && <p className="text-xs text-emerald-400 font-medium mb-4">Copied to clipboard!</p>}
+            {copied && <p className="text-xs text-blue-600 font-bold mb-4">Kode berhasil disalin ke clipboard!</p>}
 
-            <div className="pt-4">
+            <div className="pt-2">
               <button
                 onClick={() => {
                   setSubmittedOrderCode(null);
@@ -141,47 +141,47 @@ export const CommissionForm: React.FC = () => {
                     serviceCategory: 'illustration',
                     projectTitle: '',
                     description: '',
-                    budgetRange: '$200 - $500',
+                    budgetRange: 'Rp 50rb - 150rb',
                     deadline: '',
                   });
                   setFile(null);
                 }}
-                className="text-xs text-slate-400 hover:text-white underline underline-offset-4"
+                className="text-xs text-blue-600 hover:text-blue-800 font-bold underline underline-offset-4"
               >
-                Submit another inquiry
+                Kirim pengajuan proyek lainnya
               </button>
             </div>
           </div>
         ) : (
-          /* Form Card */
-          <form onSubmit={handleSubmit} className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
+          /* Kartu Form */
+          <form onSubmit={handleSubmit} className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl shadow-slate-200/50 space-y-6">
             {errorMsg && (
-              <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center gap-2">
+              <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-600 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{errorMsg}</span>
               </div>
             )}
 
-            {/* Service Category */}
+            {/* Kategori Layanan */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
-                Select Discipline / Service *
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Pilih Kategori Layanan *
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {[
-                  { id: 'illustration', label: 'Illustration' },
+                  { id: 'illustration', label: 'Ilustrasi Digital' },
                   { id: 'video', label: 'Video Editing' },
-                  { id: 'dataviz', label: 'Data Dashboard' },
-                  { id: 'other', label: 'Other Project' },
+                  { id: 'dataviz', label: 'Dashboard Data' },
+                  { id: 'other', label: 'Proyek Campuran' },
                 ].map((cat) => (
                   <button
                     key={cat.id}
                     type="button"
                     onClick={() => setFormData({ ...formData, serviceCategory: cat.id as any })}
-                    className={`py-2.5 px-3 rounded-xl text-xs font-semibold border transition-all text-center ${
+                    className={`py-3 px-3 rounded-xl text-xs font-bold border transition-all text-center ${
                       formData.serviceCategory === cat.id
-                        ? 'bg-brand-600 border-brand-500 text-white shadow-sm'
-                        : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
+                        ? 'bg-blue-600 border-blue-600 text-white shadow-sm'
+                        : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-300 hover:bg-white'
                     }`}
                   >
                     {cat.label}
@@ -190,78 +190,78 @@ export const CommissionForm: React.FC = () => {
               </div>
             </div>
 
-            {/* Contact Details */}
+            {/* Kontak Klien */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">Your Full Name *</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Nama Lengkap *</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. John Doe"
+                  placeholder="Contoh: Budi Pratama"
                   value={formData.clientName}
                   onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">Email Address *</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Alamat Email *</label>
                 <input
                   type="email"
                   required
-                  placeholder="john@example.com"
+                  placeholder="budi@example.com"
                   value={formData.clientEmail}
                   onChange={(e) => setFormData({ ...formData, clientEmail: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-colors"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">Phone / WhatsApp (Optional)</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Nomor WhatsApp / HP (Opsional)</label>
                 <input
                   type="text"
-                  placeholder="+62 812..."
+                  placeholder="0812..."
                   value={formData.clientPhone}
                   onChange={(e) => setFormData({ ...formData, clientPhone: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">Project Title *</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Judul Proyek *</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. 2D Cyberpunk Character Cover"
+                  placeholder="Contoh: Ilustrasi Sampul Buku Novel Fantasy"
                   value={formData.projectTitle}
                   onChange={(e) => setFormData({ ...formData, projectTitle: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-colors"
                 />
               </div>
             </div>
 
-            {/* Brief Description */}
+            {/* Brief Deskripsi */}
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">Brief / Requirements Description *</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1.5">Deskripsi Brief / Kebutuhan *</label>
               <textarea
                 required
                 rows={4}
-                placeholder="Explain your visual goals, style preferences, duration / dimensions, and expectations..."
+                placeholder="Ceritakan gaya visual yang diinginkan, tema, durasi / resolusi, dan ekspektasi hasil akhir..."
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-colors"
               />
             </div>
 
-            {/* File Upload Reference */}
+            {/* Upload File Lampiran */}
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">Reference Document or Image (PDF / PNG / ZIP)</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1.5">File Referensi / Dokumen Brief (PDF, PNG, JPG, ZIP)</label>
               <div className="flex items-center gap-3">
-                <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 text-xs font-medium text-slate-300 transition-colors">
-                  <Upload className="w-4 h-4 text-brand-400" />
-                  <span>{file ? file.name : 'Choose File (Max 50MB)'}</span>
+                <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-400 text-xs font-semibold text-slate-700 transition-colors">
+                  <Upload className="w-4 h-4 text-blue-600" />
+                  <span>{file ? file.name : 'Pilih File (Maksimal 50MB)'}</span>
                   <input
                     type="file"
                     className="hidden"
@@ -273,9 +273,9 @@ export const CommissionForm: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setFile(null)}
-                    className="text-xs text-red-400 hover:underline"
+                    className="text-xs text-red-500 font-bold hover:underline"
                   >
-                    Remove
+                    Hapus
                   </button>
                 )}
               </div>
@@ -284,43 +284,43 @@ export const CommissionForm: React.FC = () => {
             {/* Budget & Deadline */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">Estimated Budget</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Perkiraan Anggaran</label>
                 <select
                   value={formData.budgetRange}
                   onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-white transition-colors"
                 >
-                  <option value="Under $200">Under $200</option>
-                  <option value="$200 - $500">$200 - $500</option>
-                  <option value="$500 - $1,500">$500 - $1,500</option>
-                  <option value="$1,500+">$1,500+</option>
+                  <option value="Rp 50rb - 150rb">Rp 50.000 - Rp 150.000</option>
+                  <option value="Rp 150rb - 500rb">Rp 150.000 - Rp 500.000</option>
+                  <option value="Rp 500rb - 1.5jt">Rp 500.000 - Rp 1.500.000</option>
+                  <option value="Di atas Rp 1.5jt">Di atas Rp 1.500.000</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">Target Deadline</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Target Tenggat Waktu (Deadline)</label>
                 <input
                   type="date"
                   value={formData.deadline}
                   onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-white transition-colors"
                 />
               </div>
             </div>
 
-            {/* Submit Button */}
+            {/* Tombol Kirim */}
             <div className="pt-2">
               <button
                 type="submit"
                 disabled={submitting || uploading}
-                className="w-full py-3.5 px-6 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-sm transition-all shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-all shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {submitting ? (
-                  <span>{uploading ? 'Uploading Attachment...' : 'Submitting Order...'}</span>
+                  <span>{uploading ? 'Mengunggah Lampiran...' : 'Mengirimkan Pesanan...'}</span>
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>Send Commission Brief</span>
+                    <span>Kirim Pengajuan Komisi</span>
                   </>
                 )}
               </button>
