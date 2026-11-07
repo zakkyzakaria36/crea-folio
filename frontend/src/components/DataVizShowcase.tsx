@@ -48,13 +48,13 @@ export const DataVizShowcase: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/80 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
             <Activity className="w-3.5 h-3.5" />
-            Fitur Khusus
+            Contoh Karya Data
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mb-4">
-            Showcase Visualisasi Data & Dashboard
+            Bikin Data Lebih Enak Dipahami
           </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Data bukan hanya angka tabel, melainkan cerita visual yang memandu keputusan. Berikut contoh dashboard analitik interaktif berbasis chart modern.
+            Contoh dashboard interaktif ini menunjukkan bagaimana angka bisa diubah menjadi cerita visual yang membantu melihat tren dan mengambil keputusan.
           </p>
         </div>
 

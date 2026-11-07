@@ -11,7 +11,7 @@ export const IdentitySection: React.FC = () => (
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div className="flex items-center gap-5 p-5 rounded-2xl bg-blue-50/60 border border-blue-100 shadow-sm">
-          <img src="/IMG_2801.HEIC" alt="Zakky Zakaria" className="w-20 h-20 rounded-2xl object-cover border-4 border-white shadow-md" />
+          <img src="/IMG_2801.png" alt="Zakky Zakaria" className="w-20 h-20 rounded-2xl object-cover border-4 border-white shadow-md" />
           <div>
             <div className="flex items-center gap-2 text-blue-600 mb-1"><UserRound className="w-4 h-4" /><span className="text-xs font-bold uppercase">Nama</span></div>
             <h3 className="text-xl font-black text-slate-900">Zakky Zakaria</h3>

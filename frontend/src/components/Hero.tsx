@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Palette, Film, LineChart } from 'lucide-react';
+import { ArrowRight, Palette, Film, LineChart, GraduationCap } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -10,17 +10,27 @@ export const Hero: React.FC = () => {
       <div className="absolute bottom-10 left-10 w-72 h-72 bg-sky-200/25 blur-[90px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        {/* Intro Kreator */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <img src="/IMG_2801.png" alt="Zakky Zakaria" className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-lg ring-2 ring-blue-200" />
+          <div className="text-center sm:text-left">
+            <p className="text-sm font-semibold text-blue-600">Halo, saya Zakky</p>
+            <p className="text-sm text-slate-600 flex items-center justify-center sm:justify-start gap-1.5 mt-1"><GraduationCap className="w-4 h-4 text-blue-500" /> Student Data Science · ZxProject</p>
+            <p className="text-xs text-slate-500 mt-1">Saya membantu mengubah ide menjadi karya visual yang punya cerita.</p>
+          </div>
+        </div>
+
         {/* Status Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-blue-200/80 text-xs text-slate-700 mb-8 shadow-xs">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="font-medium text-slate-700">Menerima Proyek & Komisi</span>
+          <span className="font-medium text-slate-700">Terbuka untuk proyek baru</span>
           <span className="text-slate-300">•</span>
-          <span className="text-blue-600 font-bold">ZxProject Studio</span>
+          <span className="text-blue-600 font-bold">Mari ngobrol</span>
         </div>
 
         {/* Main Heading */}
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 mb-6 leading-tight">
-          Kreasi Seni, Video & <br />
+          Ide Anda, Kita Wujudkan <br />
           <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 bg-clip-text text-transparent">
             Visualisasi Data Interaktif
           </span>
@@ -28,7 +38,7 @@ export const Hero: React.FC = () => {
 
         {/* Subtitle */}
         <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 mb-10 leading-relaxed font-normal">
-          Solusi terpadu untuk ilustrasi digital kustom, produksi & editing video berkecepatan tinggi, serta dashboard analitik visual yang siap pakai.
+          Ilustrasi digital, editing video, dan visualisasi data yang dibuat dengan pendekatan kreatif, rapi, dan mudah dipahami.
         </p>
 
         {/* CTAs */}
