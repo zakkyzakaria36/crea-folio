@@ -24,7 +24,7 @@ export async function authMiddleware(c: Context<AppEnv>, next: Next) {
   const token = authHeader.split(' ')[1];
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as AuthUser;
-    c.set('user', decoded);
+    (c as any).set('user', decoded);
     await next();
   } catch {
     return c.json({ error: 'Unauthorized: Invalid or expired token' }, 401);

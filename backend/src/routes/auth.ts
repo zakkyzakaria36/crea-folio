@@ -46,13 +46,13 @@ authRoutes.post('/login', async (c) => {
 });
 
 authRoutes.get('/me', authMiddleware, async (c) => {
-  const currentUser = c.get('user');
+  const currentUser = (c as any).get('user') as { id: number; username: string; role: string };
   return c.json({ user: currentUser });
 });
 
 // POST change password (Admin only)
 authRoutes.post('/change-password', authMiddleware, async (c) => {
-  const currentUser = c.get('user');
+  const currentUser = (c as any).get('user') as { id: number; username: string; role: string };
   const { currentPassword, newPassword } = await c.req.json();
 
   if (!currentPassword || !newPassword) {
